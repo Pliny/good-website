@@ -23,12 +23,6 @@ gulp.task('coffee', function() {
     .pipe(browserify({
       transform: ['coffeeify'],
       extensions: ['.coffee'],
-      shim: {
-        jquery: {
-          path: 'third-party/javascripts/jquery-2.1.4.js',
-          exports: '$'
-        }
-      }
     }).on('error', gutil.log))
     .pipe(rename('main.js'))
     .pipe(gulp.dest('./public'))

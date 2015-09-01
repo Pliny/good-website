@@ -9,7 +9,8 @@ var gulp       = require('gulp'),
 
 // Development Environment libraries
 var jade       = require('gulp-jade'),
-    browserify = require('gulp-browserify');
+    browserify = require('gulp-browserify'),
+    sass       = require('gulp-sass');
 
 gulp.task('templates', function() {
   return gulp.src('src/pages/*.jade')
@@ -29,6 +30,13 @@ gulp.task('coffee', function() {
     .pipe(livereload());
 });
 
+gulp.task('styles', function() {
+  gulp.src('src/assets/stylesheets/main.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./public'))
+    .pipe(livereload());
+});
+
 gulp.task('express', function() {
   app.use(express.static(path.resolve('./public')));
   app.listen(1337);
@@ -39,16 +47,15 @@ gulp.task('watch', function () {
   livereload.listen();
   gulp.watch('src/pages/*.jade',['templates']);
   gulp.watch('src/assets/scripts/*.coffee',['coffee']);
+  gulp.watch('src/assets/stylesheets/**/*.scss',['styles']);
 });
 
 
-gulp.task('default', [ 'express', 'watch', 'templates', 'coffee' ]);
+gulp.task('default', [ 'express', 'watch', 'templates', 'coffee', 'styles' ]);
 
 // TODO
 //  - Development push (using good.davesdesrochers.com)
 //  - Production packaging
-//  - SASS
 //  - Minify
 //  - Mocha (testing)
 //  - Image copies
-//  - browserify caching (or moving jquery outside browserify)

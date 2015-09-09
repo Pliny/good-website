@@ -2,8 +2,10 @@ include ./includes/mixins.jade
 extends ./includes/template.jade
 block content
   .page.background-color1.color2
-    .company-logo-large-color2
-    .text1="We support Californians to reach their goal."
+    .page-centered
+      #large-logo-container
+        .company-logo-large-color2
+      .text1="We support Californians reach their goal."
     .arrow-down
   .page.background-color1.color2
     +header("Internet of Water Things")(class="color2")

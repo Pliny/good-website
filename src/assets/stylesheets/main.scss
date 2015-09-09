@@ -1,6 +1,7 @@
-$blue: #00AEEF;
-$white: white;
-$grey: #807F83;
+// COLORS
+$blue:  #00AEEF;
+$white: #FFFFFF;
+$grey:  #807F83;
 
 .background-color1 {
   background-color: $blue;
@@ -20,4 +21,87 @@ $grey: #807F83;
 
 .color2 {
   color: $white;
+}
+
+// FONTS
+@font-face {
+  font-family: "Dosis Light";
+  src: url('Dosis-Light.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "Roboto Thin";
+  src: url('Roboto-Thin.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+html, body {
+  font-family: "Roboto Thin", script;
+  text-rendering: optimizeLegibility;
+  font-weight: normal;
+  font-size: 100%;
+}
+
+.header {
+  font-family: "Dosis Light", script;
+  text-rendering: optimizeLegibility;
+  font-weight: normal;
+  font-size: 100%;
+}
+
+// CUSTOM STYLING
+
+$font-unit: 12;
+$first-page-content-width:  450px;
+$first-page-content-height: 290px;
+$arrow-down-width: 152px;
+
+.hidden {
+  display: none;
+}
+
+.page {
+  // Default in case javascript is disabled
+  position: relative;
+  display: none;
+}
+
+.page-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: #{-1 * $first-page-content-height/2} auto auto #{-1 * $first-page-content-width/2};
+  width: $first-page-content-width;
+  text-align: center;
+}
+
+.arrow-down {
+  background: url("./arrow-down.png") no-repeat center center;
+  background-size: 60%;
+  width: $arrow-down-width;
+  margin-left: #{-1 * $arrow-down-width/2};
+  height: 98px;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+}
+
+#large-logo-container {
+  margin-bottom: 24px;
+}
+
+.company-logo-large-color2 {
+  margin: 0 auto;
+  background:  url("./good-logo-white-large.png") no-repeat center center;
+  width: 293px;
+  height: 163px;
+}
+
+.text1 {
+  font-size: #{28/$font-unit}em;
 }

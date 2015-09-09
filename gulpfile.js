@@ -45,7 +45,7 @@ gulp.task('express', function() {
 
 gulp.task('watch', function () {
   livereload.listen();
-  gulp.watch('src/pages/*.jade',['templates']);
+  gulp.watch('src/pages/**/*.jade',['templates']);
   gulp.watch('src/assets/scripts/*.coffee',['coffee']);
   gulp.watch('src/assets/stylesheets/**/*.scss',['styles']);
 });

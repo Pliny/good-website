@@ -1,0 +1,14 @@
+mixin header(title, color)
+  .header
+    block
+    .email
+    span
+      h1(class!=attributes.class) #{title}
+
+mixin icon-and-text(title, contents)
+  .col-md-4
+    div(class!=attributes.class)
+    .text3 #{title}
+    .text4 #{contents}
+
+

@@ -1,3 +1,23 @@
-#container {
-  color: blue;
+$blue: #00AEEF;
+$white: white;
+$grey: #807F83;
+
+.background-color1 {
+  background-color: $blue;
+}
+
+.color1 {
+  color: $blue;
+}
+
+.color3 {
+  color: $grey;
+}
+
+.background-color2 {
+  background-color: $white;
+}
+
+.color2 {
+  color: $white;
 }

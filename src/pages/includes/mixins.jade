@@ -1,9 +1,11 @@
 mixin header(title, color)
   .header
-    block
-    .email
-    span
-      h1(class!=attributes.class) #{title}
+    .pull-left
+      if block
+        block
+    h1.pull-left(class!=attributes.class) #{title}
+    .email.pull-right
+    .clearfix
 
 mixin icon-and-text(title, contents)
   .col-md-4

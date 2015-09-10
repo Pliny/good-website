@@ -2,6 +2,7 @@ include ./includes/mixins.jade
 extends ./includes/template.jade
 block content
   .page.background-color1.color2
+    +header("")(class="color1")
     .page-centered
       #large-logo-container
         .company-logo-large-color2
@@ -9,14 +10,14 @@ block content
     .arrow-down
   .page.background-color1.color2
     +header("Internet of Water Things")(class="color2")
-      span.company-logo-small-color2
+      .company-logo-small-color2
     h2.
       Good is a new shower device that can save up to 50% of your water usage, while maintaining an enjoyable shower experience.
     h2.
       Good is a self-powered device with relevant real-time feedback to spur behavioral change.
   .page.background-color1.color2
     +header("Meaningful Impact")(class="color2")
-      span.company-logo-small-color2
+      .company-logo-small-color2
     .container-fluid
       .row
         +icon-and-text("Save Water", "With Good, people can see their water usage in real time, getting immediate feedback showing how a change in habit can save water.")(class="savings-icon1")
@@ -24,14 +25,14 @@ block content
         +icon-and-text("Save Energy", "2000 kWh/year. Water heating has the 2nd highest energy requirements after space heating. Saving hot water is key to achieving energy savings targets.")(class="savings-icon3")
   .page.background-color2.color3
     +header("About Us")(class="color1")
-      span.company-logo-small-color1
+      .company-logo-small-color1
     h2.
       We are a small team based in San Francisco dedicated to save water using IoT technology.
     h2.
       We believe wat saving technology needs to have a better relationship with people.
   .page.background-color2.color3
     +header("Committed To Make a Positive Impact")(class="color1")
-      span.company-logo-small-color1
+      .company-logo-small-color1
     h2.color3.
       Design & User experience focus
     p.text2.color1

@@ -39,7 +39,8 @@ gulp.task('styles', function() {
 
 gulp.task('copy-images', function() {
   gulp.src('src/assets/images/*')
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest('./public'))
+    .pipe(livereload());
 });
 
 gulp.task('copy-fonts', function() {

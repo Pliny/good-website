@@ -39,14 +39,12 @@ gulp.task('styles', function() {
 
 gulp.task('copy-images', function() {
   gulp.src('src/assets/images/*')
-    .pipe(gulp.dest('./public'))
-    .pipe(livereload());
+    .pipe(gulp.dest('./public'));
 });
 
 gulp.task('copy-fonts', function() {
   gulp.src('src/assets/fonts/*')
-    .pipe(gulp.dest('./public'))
-    .pipe(livereload());
+    .pipe(gulp.dest('./public'));
 });
 
 gulp.task('express', function() {
@@ -60,6 +58,7 @@ gulp.task('watch', function () {
   gulp.watch('src/pages/**/*.jade',['templates']);
   gulp.watch('src/assets/scripts/*.coffee',['coffee']);
   gulp.watch('src/assets/stylesheets/**/*.scss',['styles']);
+  gulp.watch('src/assets/images/*.svg', ['copy-images']);
 });
 
 

@@ -5,8 +5,8 @@ scroll
 
 setView = () ->
   height = $(document).height()
-  $('.page').css('height', height).css('display', 'block')
-  $('footer').removeClass('hidden')
+  $('.page').css('height', height)
+  $('footer, #container').removeClass('hidden')
 
 $(document).on('ready', () ->
   setView()

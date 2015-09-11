@@ -4,13 +4,14 @@ mixin header(title, color)
       if block
         block
     h1.pull-left(class!=attributes.class) #{title}
-    .email.pull-right
+    .email.pull-right.color2
     .clearfix
 
 mixin icon-and-text(title, contents)
   .col-md-4
     div(class!=attributes.class)
-    h2 #{title}
-    .text2 #{contents}
+    h2.text-center #{title}
+    .a-bit-more-narrow
+      .text2.text-center #{contents}
 
 

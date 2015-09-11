@@ -77,14 +77,41 @@ h1 {
   margin: 0;
 }
 
+h2 {
+  font-size: 3.0em;
+  font-weight: bold;
+  line-height: 1.5em;
+}
+
 .text1 {
   font-size: #{28/$font-unit}em;
 }
 
+.text2 {
+  font-size: 1.5em;
+}
+
+.a-bit-more-narrow {
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+.spacing1 {
+  height: 1.67em;
+}
+
 .page {
-  // Default in case javascript is disabled
   position: relative;
-  display: none;
+}
+
+.page-contents {
+  padding-left: 12%;
+  padding-right: 12%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 .page-centered {

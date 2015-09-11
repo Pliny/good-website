@@ -105,6 +105,9 @@ h1 {
   position: absolute;
   top: 90%;
   left: 50%;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 #large-logo-container {
@@ -138,6 +141,16 @@ h1 {
 .email {
   width: #{24/$font-unit}em;
   height: #{24/$font-unit}em;
-  background-color: $grey;
+  background: url("./at.svg") no-repeat center center;
+  text-align: center;
+  &:before {
+    font-size: 1.5em;
+    line-height: 1.1em;
+    content: "@";
+  }
+  &:hover {
+    cursor: pointer;
+    background: url("./at-dark.svg");
+  }
 }
 

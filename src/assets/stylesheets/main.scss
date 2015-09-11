@@ -59,7 +59,8 @@ html, body {
 $font-unit: 12;
 $first-page-content-width:  450px;
 $first-page-content-height: 290px;
-$arrow-down-width: 152px;
+$arrow-down-width: 60px;
+$arrow-down-height: 30px;
 
 .header > h1 {
   padding-top: 22px;
@@ -95,13 +96,25 @@ h1 {
   text-align: center;
 }
 
+@-webkit-keyframes animate { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
+@keyframes animate         { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
+@-o-keyframes animate      { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
+@-moz-keyframes animate    { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
+@-ms-keyframes animate     { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
+
+.vertical-animate {
+  -webkit-animation: animate 0.3s ease-in-out 3s infinite alternate;
+  -moz-animation:    animate 0.3s ease-in-out 3s infinite alternate;
+  -ms-animation:     animate 0.3s ease-in-out 3s infinite alternate;
+  -o-animation:      animate 0.3s ease-in-out 3s infinite alternate;
+}
+
 .arrow-down {
-  background: url("./arrow-down.png") no-repeat center center;
-  // TODO: Resize statically
-  background-size: 60%;
+  background: url("./arrow-down.svg") no-repeat center center;
   width: $arrow-down-width;
   margin-left: #{-1 * $arrow-down-width/2};
-  height: 98px;
+  margin-top: 0px;
+  height: $arrow-down-height;
   position: absolute;
   top: 90%;
   left: 50%;

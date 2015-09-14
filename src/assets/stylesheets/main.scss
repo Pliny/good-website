@@ -194,3 +194,27 @@ h2 {
   }
 }
 
+.savings-icon1 {
+  background: url("./save-water.png") no-repeat center center;
+  // TODO: Resize statically
+  background-size: 100%;
+  width: #{300*.6}px;
+  height: #{291*.6}px;
+}
+
+.savings-icon2 {
+  background: url("./save-money.png") no-repeat center center;
+  // TODO: Resize statically
+  background-size: 100%;
+  width: #{300*.6}px;
+  height: #{291*.6}px;
+}
+
+.savings-icon3 {
+  background: url("./save-elec.png") no-repeat center center;
+  // TODO: Resize statically
+  background-size: 100%;
+  width: #{300*.6}px;
+  height: #{291*.6}px;
+}
+

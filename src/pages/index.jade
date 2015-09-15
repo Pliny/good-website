@@ -2,7 +2,9 @@ include ./includes/mixins.jade
 extends ./includes/template.jade
 block content
   .page.background-color1.color2
-    +header("")(class="color1")
+    .header
+      .email.pull-right.color2
+      .clearfix
     .page-contents
       .page-centered
         #large-logo-container

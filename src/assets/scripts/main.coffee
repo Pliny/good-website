@@ -1,4 +1,5 @@
 Scroll = require('./scroll')
+MyScrollSpy = require('./scrollspy')
 
 height = 768
 scroll
@@ -11,8 +12,9 @@ setView = () ->
 $(document).on('ready', () ->
   setView()
   scroll = new Scroll($('.page:nth-of-type(2)'));
+  scrollSpy = new MyScrollSpy($('.page'))
 
-  $('.arrow-down').on('click', () ->
+  $(document).on('click', '.arrow-down', () ->
     scroll.animateScrollFor(1000)
   )
 )

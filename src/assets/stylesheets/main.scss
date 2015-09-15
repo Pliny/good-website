@@ -52,6 +52,12 @@ html, body {
   text-rendering: optimizeLegibility;
   font-weight: normal;
   font-size: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: inherit;
 }
 
 // CUSTOM STYLING

@@ -1,3 +1,12 @@
+$screen-xs-min: 480px  !default;
+$screen-sm-min: 768px  !default;
+$screen-md-min: 992px  !default;
+$screen-lg-min: 1200px !default;
+
+$screen-xs-max: ($screen-sm-min - 1) !default;
+$screen-sm-max: ($screen-md-min - 1) !default;
+$screen-md-max: ($screen-lg-min - 1) !default;
+
 // COLORS
 $blue:  #00AEEF;
 $white: #FFFFFF;
@@ -69,7 +78,7 @@ $arrow-down-width: 60px;
 $arrow-down-height: 30px;
 
 .header > h1 {
-  padding-top: 22px;
+  padding-top: 1.2%;
 }
 
 .header > .email {
@@ -78,19 +87,30 @@ $arrow-down-height: 30px;
 }
 
 h1 {
-  font-size: #{24/$font-unit}em;
+  @media (min-width: $screen-sm-min) {
+    font-size: #{24/$font-unit}em;
+  }
+  font-size: 1.2em;
   padding: 0;
   margin: 0;
 }
 
 h2 {
-  font-size: 3.0em;
+  @media (min-width: $screen-sm-min) {
+    line-height: 1.5em;
+    font-size: 3.0em;
+  }
+  font-size: 1.5em;
   font-weight: bold;
-  line-height: 1.5em;
+  margin: 0;
+  padding: 0;
 }
 
 .text1 {
-  font-size: #{28/$font-unit}em;
+  @media (min-width: $screen-md-min) {
+    font-size: #{28/$font-unit}em;
+  }
+  font-size: 6vh;
 }
 
 .text2 {
@@ -107,26 +127,17 @@ h2 {
 }
 
 .page {
+  height: 100vmax;
+}
+
+#container {
+  padding: 0;
+}
+
+.vertical-align {
   position: relative;
-}
-
-.page-contents {
-  padding-left: 12%;
-  padding-right: 12%;
-  position: absolute;
   top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-}
-
-.page-centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: #{-1 * $first-page-content-height/2} auto auto #{-1 * $first-page-content-width/2};
-  width: $first-page-content-width;
-  text-align: center;
+  transform: translateY(-50%);
 }
 
 @-webkit-keyframes animate { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
@@ -163,16 +174,29 @@ h2 {
 .company-logo-large-color2 {
   margin: 0 auto;
   background:  url("./good-logo-white-large.png") no-repeat center center;
-  width: 293px;
-  height: 163px;
+  background-size: 100%;
+  @media (min-width: $screen-md-min) {
+    width: 293px;
+    height: 163px;
+  }
+  @media (max-width: $screen-sm-max) {
+    width: 50vw;
+    height: 28vw;
+  }
 }
 
 .company-logo-small-color2 {
   background: url("./good-logo-white-small.png") no-repeat center center;
   // TODO: Resize statically
   background-size: 60%;
-  width: 147px;
-  height: 82px;
+  @media (min-width: $screen-md-min) {
+    width: 147px;
+    height: 82px;
+  }
+  @media (max-width: $screen-sm-max) {
+    width: 24vw;
+    height: 7.4vw;
+  }
 }
 
 .company-logo-small-color1 {

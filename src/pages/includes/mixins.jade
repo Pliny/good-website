@@ -3,12 +3,12 @@ mixin header(title, color)
     .pull-left
       if block
         block
-    h1.pull-left(class!=attributes.class) #{title}
+    h1.pull-left(class!=attributes.class).fade-in #{title}
     .email.pull-right.color2
     .clearfix
 
 mixin icon-and-text(title, contents)
-  .col-md-4
+  .col-md-4.spacing1
     div.center-block(class!=attributes.class)
     h2.text-center #{title}
     .a-bit-more-narrow

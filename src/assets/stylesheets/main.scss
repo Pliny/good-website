@@ -56,11 +56,20 @@ html, body {
   font-size: 100%;
 }
 
-.header {
+.header, footer {
   font-family: "Dosis Medium", script;
   text-rendering: optimizeLegibility;
-  font-weight: normal;
   font-size: 100%;
+}
+
+// CUSTOM STYLING
+
+$font-unit: 12;
+$arrow-down-width: 60px;
+$arrow-down-height: 30px;
+
+.header {
+  font-weight: normal;
   position: fixed;
   top: 0;
   left: 0;
@@ -69,65 +78,34 @@ html, body {
   background-color: inherit;
 }
 
-// CUSTOM STYLING
-
-$font-unit: 12;
-$first-page-content-width:  450px;
-$first-page-content-height: 290px;
-$arrow-down-width: 60px;
-$arrow-down-height: 30px;
-
 .header > h1 {
-  padding-top: 1.2%;
+  padding-top: 2.5%;
 }
 
 .header > .email {
-  margin-right: 24px;
-  margin-top: 21px;
+  margin-right: 2%;
+  margin-top: 2%;
 }
 
 h1 {
   @media (min-width: $screen-sm-min) {
     font-size: #{24/$font-unit}em;
   }
-  font-size: 1.2em;
-  padding: 0;
-  margin: 0;
-}
-
-h2 {
-  @media (min-width: $screen-sm-min) {
-    line-height: 1.5em;
-    font-size: 3.0em;
-  }
   font-size: 1.5em;
-  font-weight: bold;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .text1 {
-  @media (min-width: $screen-md-min) {
+  @media (min-width: $screen-sm-min) {
     font-size: #{28/$font-unit}em;
   }
-  font-size: 6vh;
-}
-
-.text2 {
-  font-size: 1.5em;
-}
-
-.a-bit-more-narrow {
-  padding-left: 6%;
-  padding-right: 6%;
-}
-
-.spacing1 {
-  height: 1.67em;
+  font-size: 5vh;
 }
 
 .page {
-  height: 100vmax;
+  padding: 15%;
+  // max-width: 615px;
 }
 
 #container {
@@ -138,6 +116,26 @@ h2 {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+@-webkit-keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes fade         { 0% { opacity: 0; } 100% { opacity: 1; } }
+@-o-keyframes fade      { 0% { opacity: 0; } 100% { opacity: 1; } }
+@-moz-keyframes fade    { 0% { opacity: 0; } 100% { opacity: 1; } }
+@-ms-keyframes fade     { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+.fade-in {
+  -webkit-animation: fade 0.3s linear;
+  -moz-animation:    fade 0.3s linear;
+  -ms-animation:     fade 0.3s linear;
+  -o-animation:      fade 0.3s linear;
+}
+
+.fade-out {
+  -webkit-animation: fade 0.3s linear 0 1 reverse;
+  -moz-animation:    fade 0.3s linear 0 1 reverse;
+  -ms-animation:     fade 0.3s linear 0 1 reverse;
+  -o-animation:      fade 0.3s linear 0 1 reverse;
 }
 
 @-webkit-keyframes animate { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
@@ -155,12 +153,21 @@ h2 {
 
 .arrow-down {
   background: url("./arrow-down.svg") no-repeat center center;
-  width: $arrow-down-width;
-  margin-left: #{-1 * $arrow-down-width/2};
+
+  width:  #{$arrow-down-width/2};
+  height: #{$arrow-down-height/2};
+  margin-left: #{-1 * $arrow-down-width/4};
+  top: 93%;
+
+  @media (min-width: $screen-sm-min) {
+    width: $arrow-down-width;
+    margin-left: #{-1 * $arrow-down-width/2};
+    height: $arrow-down-height;
+    top: 90%;
+  }
+
   margin-top: 0px;
-  height: $arrow-down-height;
   position: absolute;
-  top: 90%;
   left: 50%;
   &:hover {
     cursor: pointer;
@@ -168,44 +175,51 @@ h2 {
 }
 
 #large-logo-container {
-  margin-bottom: 24px;
+  margin-bottom: 3%;
+}
+
+#title-container {
+  margin: auto auto;
+  width: 70vw;
+  @media (min-width: $screen-sm-min) {
+    width: 400px;
+  }
 }
 
 .company-logo-large-color2 {
   margin: 0 auto;
   background:  url("./good-logo-white-large.png") no-repeat center center;
   background-size: 100%;
-  @media (min-width: $screen-md-min) {
+  width: 50vw;
+  height: 28vw;
+  @media (min-width: $screen-sm-min) {
     width: 293px;
     height: 163px;
-  }
-  @media (max-width: $screen-sm-max) {
-    width: 50vw;
-    height: 28vw;
   }
 }
 
 .company-logo-small-color2 {
   background: url("./good-logo-white-small.png") no-repeat center center;
-  // TODO: Resize statically
-  background-size: 60%;
-  @media (min-width: $screen-md-min) {
-    width: 147px;
-    height: 82px;
-  }
-  @media (max-width: $screen-sm-max) {
-    width: 24vw;
-    height: 7.4vw;
-  }
 }
 
 .company-logo-small-color1 {
   // TODO: Get better png file
   background: url("./good-logo-blue-small.png") no-repeat center center;
+}
+
+.company-logo-small-color2, .company-logo-small-color1 {
   // TODO: Resize statically
   background-size: 60%;
-  width: 147px;
-  height: 82px;
+  width: 100px;
+  height: 50px;
+  @media (min-width: $screen-sm-min) {
+    width: 147px;
+    height: 82px;
+  }
+}
+
+.spacing1 {
+  padding-bottom: 6%;
 }
 
 .email {
@@ -246,5 +260,9 @@ h2 {
   background-size: 100%;
   width: #{300*.6}px;
   height: #{291*.6}px;
+}
+
+footer {
+  padding: 6%;
 }
 

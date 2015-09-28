@@ -64,8 +64,8 @@ html, body {
 
 // CUSTOM STYLING
 
-$font-unit: 12;
-$arrow-down-width: 60px;
+$font-unit: 16;
+$arrow-down-width: 38px;
 $arrow-down-height: 30px;
 
 .header {
@@ -79,7 +79,11 @@ $arrow-down-height: 30px;
 }
 
 .header > h1 {
-  padding-top: 2.5%;
+  @media (min-width: $screen-sm-min) {
+  padding-top: 14px;
+  }
+  padding-top: 7px;
+  padding-left: 18px;
 }
 
 .header > .email {
@@ -89,22 +93,54 @@ $arrow-down-height: 30px;
 
 h1 {
   @media (min-width: $screen-sm-min) {
-    font-size: #{24/$font-unit}em;
+    font-size: #{40/$font-unit}em;
   }
-  font-size: 1.5em;
+  font-weight: bold;
+  letter-spacing: .06em;
+  font-size: #{28/$font-unit}em;
   padding: 0;
   margin: 0;
 }
 
-.text1 {
+h2 {
   @media (min-width: $screen-sm-min) {
-    font-size: #{28/$font-unit}em;
+    font-size: #{57/$font-unit}em;
   }
-  font-size: 5vh;
+  letter-spacing: 0.055em;
+  line-height: 1.4em;
+  font-weight: bold;
+}
+
+.text1 {
+  font-weight: bold;
+  @media (min-width: $screen-sm-min) {
+    font-size: #{38/$font-unit}em;
+    letter-spacing: .05em;
+  }
+  font-size: 7vw;
+}
+
+.text2 {
+  @media (min-width: $screen-sm-min) {
+    font-size: #{24/$font-unit}em;
+  }
+  letter-spacing: .05em;
+  line-height: 1.5em;
+}
+
+.details-container {
+  @media (min-width: $screen-sm-min) {
+    padding-top: 10px;
+  }
+  margin: auto 4%;
 }
 
 .page {
-  padding: 15%;
+  @media (min-width: $screen-sm-min) {
+    padding-left: 165px;
+    padding-top: 5%;
+  }
+  padding: 10%;
   // max-width: 615px;
 }
 
@@ -145,10 +181,10 @@ h1 {
 @-ms-keyframes animate     { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
 
 .vertical-animate {
-  -webkit-animation: animate 0.3s ease-in-out 3s infinite alternate;
-  -moz-animation:    animate 0.3s ease-in-out 3s infinite alternate;
-  -ms-animation:     animate 0.3s ease-in-out 3s infinite alternate;
-  -o-animation:      animate 0.3s ease-in-out 3s infinite alternate;
+  -webkit-animation: animate 0.3s ease-in-out 2s infinite alternate;
+  -moz-animation:    animate 0.3s ease-in-out 2s infinite alternate;
+  -ms-animation:     animate 0.3s ease-in-out 2s infinite alternate;
+  -o-animation:      animate 0.3s ease-in-out 2s infinite alternate;
 }
 
 .arrow-down {
@@ -157,13 +193,11 @@ h1 {
   width:  #{$arrow-down-width/2};
   height: #{$arrow-down-height/2};
   margin-left: #{-1 * $arrow-down-width/4};
-  top: 93%;
 
   @media (min-width: $screen-sm-min) {
     width: $arrow-down-width;
-    margin-left: #{-1 * $arrow-down-width/2};
     height: $arrow-down-height;
-    top: 90%;
+    margin-left: #{-1 * $arrow-down-width/2};
   }
 
   margin-top: 0px;
@@ -182,7 +216,7 @@ h1 {
   margin: auto auto;
   width: 70vw;
   @media (min-width: $screen-sm-min) {
-    width: 400px;
+    width: 450px;
   }
 }
 
@@ -209,7 +243,7 @@ h1 {
 
 .company-logo-small-color2, .company-logo-small-color1 {
   // TODO: Resize statically
-  background-size: 60%;
+  background-size: 68%;
   width: 100px;
   height: 50px;
   @media (min-width: $screen-sm-min) {
@@ -222,47 +256,56 @@ h1 {
   padding-bottom: 6%;
 }
 
+.spacing2 {
+  margin-bottom: -14px;
+}
+
 .email {
-  width: #{24/$font-unit}em;
-  height: #{24/$font-unit}em;
+  width: #{40/$font-unit}em;
+  height: #{40/$font-unit}em;
   background: url("./at.svg") no-repeat center center;
   text-align: center;
   &:before {
     font-size: 1.5em;
-    line-height: 1.1em;
+    line-height: 1.4em;
     content: "@";
   }
   &:hover {
     cursor: pointer;
+    @media (min-width: $screen-sm-min) {
+      background: url("./at-dark.svg");
+    }
+  }
+  &:active {
     background: url("./at-dark.svg");
   }
 }
 
 .savings-icon1 {
-  background: url("./save-water.png") no-repeat center center;
-  // TODO: Resize statically
+  background: url("./save-water.svg") no-repeat center center;
   background-size: 100%;
-  width: #{300*.6}px;
-  height: #{291*.6}px;
+  width: 220px;
+  height: 220px;
 }
 
 .savings-icon2 {
-  background: url("./save-money.png") no-repeat center center;
-  // TODO: Resize statically
+  background: url("./save-money.svg") no-repeat center center;
   background-size: 100%;
-  width: #{300*.6}px;
-  height: #{291*.6}px;
+  width: 220px;
+  height: 220px;
 }
 
 .savings-icon3 {
-  background: url("./save-elec.png") no-repeat center center;
-  // TODO: Resize statically
+  background: url("./save-energy.svg") no-repeat center center;
   background-size: 100%;
-  width: #{300*.6}px;
-  height: #{291*.6}px;
+  width: 220px;
+  height: 220px;
 }
 
 footer {
   padding: 6%;
+  font-size: #{22/$font-unit}em;
+  letter-spacing: 0.1em;
+  font-weight: bold;
 }
 

@@ -66,7 +66,7 @@ $(document).on('ready', () ->
     scroll.animateScrollFor(1000)
   )
 
-  $(document).on('animationend', '.fade-in-and-out', () ->
+  $(document).on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', '.fade-in-and-out', () ->
     $(this).removeClass('fade-in-and-out').addClass('hidden')
   )
 )

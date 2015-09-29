@@ -1,16 +1,19 @@
 include ./includes/mixins.jade
 extends ./includes/template.jade
 block content
-  .page.set-height.background-color1.color2#page0
+  .email.color2
+  .page.set-height.background-color2.color2#page0
     .header
-      .email.pull-right.color2
       .clearfix
-    .center-block.vertical-align
+    #problem1.text1.hidden="XX gal. water consumption per person."
+    #problem2.text1.hidden="Some other fun fact about water."
+    #water-animation-initial.background-color1.color2.in-front.blurry-top.hidden
+    .water-animation-final.vertical-align.hidden
       #large-logo-container
         .company-logo-large-color2
       #title-container
         .text1.text-center="We support Californians reach their goal."
-    .arrow-down.vertical-animate
+    .arrow-down.vertical-animate.water-animation-final.hidden
   .page.background-color1.color2#page1
     +header("Save Water")(class="color2")
       .company-logo-small-color2

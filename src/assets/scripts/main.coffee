@@ -4,6 +4,7 @@ MyScrollSpy = require('./scrollspy')
 SCREENSMMIN = 768
 
 scroll
+height = 768
 
 PageCopy = {
   '#page1 > .header > h1' : { 'smallScreen' : "Save Water",   'largeScreen' : "Internet of Water Things" },
@@ -31,15 +32,42 @@ setView = () ->
   $('.arrow-down').css('top', height-(height*0.075))
 
   $(setHeightEle).css('height', height)
-  $('footer, #container').removeClass('hidden')
+  $('#water-animation-initial').addClass('slow-fade-in')
+  $('footer, #container, #water-animation-initial').removeClass('hidden')
 
 $(document).on('ready', () ->
   setView()
-  scroll = new Scroll($('.page:nth-of-type(2)'));
+  scroll = new Scroll($('#page1'))
   scrollSpy = new MyScrollSpy($('.page'))
+
+  setTimeout(() ->
+    $('#water-animation-initial').css('height', '80%')
+    setTimeout(() ->
+      $('#water-animation-initial').css('height', '33%')
+      setTimeout(() ->
+        $('#water-animation-initial').css('height', '100%')
+        setTimeout(() ->
+          $('#water-animation-initial').removeClass('in-front').removeClass('blurry-top')
+          $('.water-animation-final').removeClass('hidden').addClass('slow-fade-in')
+        4000)
+      4000)
+    4000)
+  1000)
+
+  setTimeout(() ->
+    $('#problem1').removeClass('hidden').addClass('fade-in-and-out').css('top', height*0.50)
+    setTimeout(() ->
+      $('#problem1').removeClass('fade-in-and-out').addClass('hidden')
+      $('#problem2').removeClass('hidden').addClass('fade-in-and-out').css('top', height*0.70)
+    3500)
+  2500)
 
   $(document).on('click', '.arrow-down', () ->
     scroll.animateScrollFor(1000)
+  )
+
+  $(document).on('animationend', '.fade-in-and-out', () ->
+    $(this).removeClass('fade-in-and-out').addClass('hidden')
   )
 )
 

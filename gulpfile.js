@@ -32,7 +32,8 @@ gulp.task('coffee', function() {
 
 gulp.task('styles', function() {
   gulp.src('src/assets/stylesheets/main.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({includePaths: ['src/assets/stylesheets']}))
+    .on('error', sass.logError)
     .pipe(gulp.dest('./public'))
     .pipe(livereload());
 });

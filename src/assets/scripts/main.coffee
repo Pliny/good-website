@@ -48,11 +48,7 @@ getAnimMs = ($animatedEle) ->
 
   return dur
 
-$(document).on('ready', () ->
-  setView()
-  scroll = new Scroll($('#page1'))
-  scrollSpy = new MyScrollSpy($('.page'))
-
+manageInitialAnimation = () ->
   initAnimDur = getAnimMs($('#water-animation-element'))
   fadeAnimDur = 0.23*initAnimDur
 
@@ -66,13 +62,22 @@ $(document).on('ready', () ->
     $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
   ,(initAnimDur*0.69)-(fadeAnimDur/1.5))
 
-  $(document).on('click', '.arrow-down', () ->
-    scroll.animateScrollFor(1000)
-  )
-
   $(document).on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', '.initial-anim', () ->
     $('.problems').addClass('hidden')
     $('.water-animation-final').removeClass('hidden')
   )
+
+
+$(document).on('ready', () ->
+  setView()
+  scroll = new Scroll($('#page1'))
+  scrollSpy = new MyScrollSpy($('.page'))
+
+  manageInitialAnimation()
+
+  $(document).on('click', '.arrow-down', () ->
+    scroll.animateScrollFor(1000)
+  )
+
 )
 

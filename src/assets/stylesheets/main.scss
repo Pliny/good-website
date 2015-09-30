@@ -1,119 +1,32 @@
-$screen-xs-min: 480px  !default;
-$screen-sm-min: 768px  !default;
-$screen-md-min: 992px  !default;
-$screen-lg-min: 1200px !default;
+@import 'colors';
+@import 'screens';
+@import 'fonts';
+@import 'mixins';
+@import 'animations';
 
-$screen-xs-max: ($screen-sm-min - 1) !default;
-$screen-sm-max: ($screen-md-min - 1) !default;
-$screen-md-max: ($screen-lg-min - 1) !default;
-
-// Keyframes
-@mixin animation($params...) {
-  -webkit-animation: $params;
-  -moz-animation:    $params;
-  -ms-animation:     $params;
-  -o-animation:      $params;
-  animation:         $params;
-}
-
-@mixin transform($params...) {
-  transform:         $params;
-  -ms-transform:     $params;
-  -webkit-transform: $params;
-  -moz-transform:    $params;
-  -o-transform:      $params;
-}
-
-@mixin keyframes($name) {
-  @-webkit-keyframes #{$name} { @content; }
-  @keyframes         #{$name} { @content; }
-  @-o-keyframes      #{$name} { @content; }
-  @-moz-keyframes    #{$name} { @content; }
-  @-ms-keyframes     #{$name} { @content; }
-}
-
-@include keyframes(fade-in-out) {
-   0% { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; }
-}
-
-@include keyframes(initial-anim) {
-      0% { height:  15%; opacity: 0; }
-      9% { height:  15%; opacity: 1; }
-     39% { height:  80%; opacity: 1; }
-     69% { height:  33%; opacity: 1; }
-    100% { height: 100%; opacity: 1; }
-}
-
-@include keyframes(up-and-down) {
-  0% { margin-top: 0px; } 100% { margin-top: 3px; }
-}
-
-@include keyframes(fade) {
-  0% { opacity: 0; } 100% { opacity: 1; }
-}
-
-
-
-// COLORS
-$blue:  #00AEEF;
-$white: #FFFFFF;
-$grey:  #807F83;
-
-.background-color1 {
-  background-color: $blue;
-}
-
-.color1 {
-  color: $blue;
-}
-
-.color3 {
-  color: $grey;
-}
-
-.background-color2 {
-  background-color: $white;
-}
-
-.color2 {
-  color: $white;
-}
-
-// FONTS
-@font-face {
-  font-family: "Dosis Medium";
-  src: url('Dosis-Medium.otf') format('opentype');
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: normal;
-}
-
-@font-face {
-  font-family: "Roboto Thin";
-  src: url('Roboto-Thin.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: normal;
-}
-
-html, body {
-  font-family: "Roboto Thin", script;
-  text-rendering: optimizeLegibility;
-  font-weight: normal;
-  font-size: 100%;
-}
-
-.header, footer, .email {
-  font-family: "Dosis Medium", script;
-  text-rendering: optimizeLegibility;
-  font-size: 100%;
-}
-
-// CUSTOM STYLING
-
-$font-unit: 16;
 $arrow-down-width: 38px;
 $arrow-down-height: 30px;
+
+.arrow-down {
+  background: url("./arrow-down.svg") no-repeat center center;
+
+  width:  #{$arrow-down-width/2};
+  height: #{$arrow-down-height/2};
+  margin-left: #{-1 * $arrow-down-width/4};
+
+  @media (min-width: $screen-sm-min) {
+    width: $arrow-down-width;
+    height: $arrow-down-height;
+    margin-left: #{-1 * $arrow-down-width/2};
+  }
+
+  margin-top: 0px;
+  position: absolute;
+  left: 50%;
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 .header {
   font-weight: normal;
@@ -131,43 +44,6 @@ $arrow-down-height: 30px;
   }
   padding-top: 7px;
   padding-left: 8px;
-}
-
-h1 {
-  @media (min-width: $screen-sm-min) {
-    font-size: #{40/$font-unit}em;
-  }
-  font-weight: bold;
-  letter-spacing: .06em;
-  font-size: #{28/$font-unit}em;
-  padding: 0;
-  margin: 0;
-}
-
-h2 {
-  @media (min-width: $screen-sm-min) {
-    font-size: #{57/$font-unit}em;
-  }
-  letter-spacing: 0.055em;
-  line-height: 1.4em;
-  font-weight: bold;
-}
-
-.text1 {
-  font-weight: bold;
-  @media (min-width: $screen-sm-min) {
-    font-size: #{38/$font-unit}em;
-    letter-spacing: .05em;
-  }
-  font-size: 7vw;
-}
-
-.text2 {
-  @media (min-width: $screen-sm-min) {
-    font-size: #{24/$font-unit}em;
-  }
-  letter-spacing: .05em;
-  line-height: 1.5em;
 }
 
 .details-container {
@@ -245,27 +121,6 @@ h2 {
 
 .vertical-animate {
   @include animation(up-and-down 0.3s ease-in-out 2s infinite alternate);
-}
-
-.arrow-down {
-  background: url("./arrow-down.svg") no-repeat center center;
-
-  width:  #{$arrow-down-width/2};
-  height: #{$arrow-down-height/2};
-  margin-left: #{-1 * $arrow-down-width/4};
-
-  @media (min-width: $screen-sm-min) {
-    width: $arrow-down-width;
-    height: $arrow-down-height;
-    margin-left: #{-1 * $arrow-down-width/2};
-  }
-
-  margin-top: 0px;
-  position: absolute;
-  left: 50%;
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 #large-logo-container {

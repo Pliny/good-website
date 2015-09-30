@@ -1,0 +1,69 @@
+
+$font-unit: 16;
+
+@font-face {
+  font-family: "Dosis Medium";
+  src: url('Dosis-Medium.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "Roboto Thin";
+  src: url('Roboto-Thin.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+html, body {
+  font-family: "Roboto Thin", script;
+  text-rendering: optimizeLegibility;
+  font-weight: normal;
+  font-size: 100%;
+}
+
+.header, footer, .email {
+  font-family: "Dosis Medium", script;
+  text-rendering: optimizeLegibility;
+  font-size: 100%;
+}
+
+h1 {
+  @media (min-width: $screen-sm-min) {
+    font-size: #{40/$font-unit}em;
+  }
+  font-weight: bold;
+  letter-spacing: .06em;
+  font-size: #{28/$font-unit}em;
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  @media (min-width: $screen-sm-min) {
+    font-size: #{57/$font-unit}em;
+  }
+  letter-spacing: 0.055em;
+  line-height: 1.4em;
+  font-weight: bold;
+}
+
+.text1 {
+  font-weight: bold;
+  @media (min-width: $screen-sm-min) {
+    font-size: #{38/$font-unit}em;
+    letter-spacing: .05em;
+  }
+  font-size: 7vw;
+}
+
+.text2 {
+  @media (min-width: $screen-sm-min) {
+    font-size: #{24/$font-unit}em;
+  }
+  letter-spacing: .05em;
+  line-height: 1.5em;
+}
+

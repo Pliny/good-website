@@ -32,42 +32,47 @@ setView = () ->
   $('.arrow-down').css('top', height-(height*0.075))
 
   $(setHeightEle).css('height', height)
-  $('#water-animation-initial').addClass('slow-fade-in')
-  $('footer, #container, #water-animation-initial').removeClass('hidden')
+  $('#water-animation-element').addClass('initial-anim')
+  $('footer, #container, #water-animation-element').removeClass('hidden')
+
+getAnimMs = ($animatedEle) ->
+  dur = $animatedEle.css('animation-duration')
+  if dur.search(/ms$/) > 0
+    dur = dur.substring(0, dur.length-2)
+  else if dur.search(/s$/) > 0
+    dur = dur.substring(0, dur.length-1)
+    dur *= 1000
+  else
+    console.log("ERROR in animation time in '"+$animatedEle+"'.")
+    dur = 0
+
+  return dur
 
 $(document).on('ready', () ->
   setView()
   scroll = new Scroll($('#page1'))
   scrollSpy = new MyScrollSpy($('.page'))
 
-  setTimeout(() ->
-    $('#water-animation-initial').css('height', '80%')
-    setTimeout(() ->
-      $('#water-animation-initial').css('height', '33%')
-      setTimeout(() ->
-        $('#water-animation-initial').css('height', '100%')
-        setTimeout(() ->
-          $('#water-animation-initial').removeClass('in-front').removeClass('blurry-top')
-          $('.water-animation-final').removeClass('hidden').addClass('slow-fade-in')
-        4000)
-      4000)
-    4000)
-  1000)
+  initAnimDur = getAnimMs($('#water-animation-element'))
+  fadeAnimDur = 0.23*initAnimDur
 
   setTimeout(() ->
-    $('#problem1').removeClass('hidden').addClass('fade-in-and-out').css('top', height*0.50)
-    setTimeout(() ->
-      $('#problem1').removeClass('fade-in-and-out').addClass('hidden')
-      $('#problem2').removeClass('hidden').addClass('fade-in-and-out').css('top', height*0.70)
-    3500)
-  2500)
+    $('#problem1').addClass('fade-in-and-out').css('top', height*0.55)
+    $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
+  ,(initAnimDur*0.39)-(fadeAnimDur/1.5))
+
+  setTimeout(() ->
+    $('#problem2').addClass('fade-in-and-out').css('top', height*0.70)
+    $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
+  ,(initAnimDur*0.69)-(fadeAnimDur/1.5))
 
   $(document).on('click', '.arrow-down', () ->
     scroll.animateScrollFor(1000)
   )
 
-  $(document).on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', '.fade-in-and-out', () ->
-    $(this).removeClass('fade-in-and-out').addClass('hidden')
+  $(document).on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', '.initial-anim', () ->
+    $('.problems').addClass('hidden')
+    $('.water-animation-final').removeClass('hidden')
   )
 )
 

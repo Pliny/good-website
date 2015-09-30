@@ -7,6 +7,53 @@ $screen-xs-max: ($screen-sm-min - 1) !default;
 $screen-sm-max: ($screen-md-min - 1) !default;
 $screen-md-max: ($screen-lg-min - 1) !default;
 
+// Keyframes
+@mixin animation($params...) {
+  -webkit-animation: $params;
+  -moz-animation:    $params;
+  -ms-animation:     $params;
+  -o-animation:      $params;
+  animation:         $params;
+}
+
+@mixin transform($params...) {
+  transform:         $params;
+  -ms-transform:     $params;
+  -webkit-transform: $params;
+  -moz-transform:    $params;
+  -o-transform:      $params;
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} { @content; }
+  @keyframes         #{$name} { @content; }
+  @-o-keyframes      #{$name} { @content; }
+  @-moz-keyframes    #{$name} { @content; }
+  @-ms-keyframes     #{$name} { @content; }
+}
+
+@include keyframes(fade-in-out) {
+   0% { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; }
+}
+
+@include keyframes(initial-anim) {
+      0% { height:  15%; opacity: 0; }
+      9% { height:  15%; opacity: 1; }
+     39% { height:  80%; opacity: 1; }
+     69% { height:  33%; opacity: 1; }
+    100% { height: 100%; opacity: 1; }
+}
+
+@include keyframes(up-and-down) {
+  0% { margin-top: 0px; } 100% { margin-top: 3px; }
+}
+
+@include keyframes(fade) {
+  0% { opacity: 0; } 100% { opacity: 1; }
+}
+
+
+
 // COLORS
 $blue:  #00AEEF;
 $white: #FFFFFF;
@@ -74,7 +121,6 @@ $arrow-down-height: 30px;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 99;
   background-color: inherit;
 }
 
@@ -147,31 +193,15 @@ h2 {
 .vertical-align {
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
+  @include transform(translateY(-50%));
 }
 
-@-webkit-keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes         fade { 0% { opacity: 0; } 100% { opacity: 1; } }
-@-o-keyframes      fade { 0% { opacity: 0; } 100% { opacity: 1; } }
-@-moz-keyframes    fade { 0% { opacity: 0; } 100% { opacity: 1; } }
-@-ms-keyframes     fade { 0% { opacity: 0; } 100% { opacity: 1; } }
-
 .fade-in {
-  -webkit-animation: fade 0.5s linear;
-  -moz-animation:    fade 0.5s linear;
-  -ms-animation:     fade 0.5s linear;
-  -o-animation:      fade 0.5s linear;
+  @include animation(fade 0.5s linear);
 }
 
 .slow-fade-in {
-  -webkit-animation: fade 0.8s linear;
-  -moz-animation:    fade 0.8s linear;
-  -ms-animation:     fade 0.8s linear;
-  -o-animation:      fade 0.8s linear;
+  @include animation(fade 0.8s linear);
 }
 
 .in-front {
@@ -189,58 +219,32 @@ h2 {
   border-image:            -moz-linear-gradient(bottom, $blue 0%, $white 100%) fill 100% 0 stretch;
 }
 
-#water-animation-initial {
+#water-animation-element {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 15%;
-
-  -webkit-transition: height 4s cubic-bezier(0.390, 0.060, 0.105, 0.980) 0s;
-  -moz-transition:    height 4s cubic-bezier(0.390, 0.060, 0.105, 0.980) 0s;
-  -ms-transition:     height 4s cubic-bezier(0.390, 0.060, 0.105, 0.980) 0s;
-  -o-transition:      height 4s cubic-bezier(0.390, 0.060, 0.105, 0.980) 0s;
-  transition:         height 4s cubic-bezier(0.390, 0.060, 0.105, 0.980) 0s;
+  height: 100%;
 }
 
-@-webkit-keyframes fade-in-out { 0% { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes         fade-in-out { 0% { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; } }
-@-o-keyframes      fade-in-out { 0% { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; } }
-@-moz-keyframes    fade-in-out { 0% { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; } }
-@-ms-keyframes     fade-in-out { 0% { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; } }
+.initial-anim {
+  @include animation(initial-anim 10s cubic-bezier(0.390, 0.060, 0.105, 0.980));
+}
 
 .fade-in-and-out {
-  -webkit-animation: fade-in-out 3s ease-in-out 0s 1 normal;
-  -moz-animation:    fade-in-out 3s ease-in-out 0s 1 normal;
-  -ms-animation:     fade-in-out 3s ease-in-out 0s 1 normal;
-  -o-animation:      fade-in-out 3s ease-in-out 0s 1 normal;
-  animation:         fade-in-out 3s ease-in-out 0s 1 normal;
+  @include animation(fade-in-out 3s ease-in-out 0s 1 normal);
 }
 
 #problem1, #problem2 {
-  z-index: 3;
   position: relative;
   left: 50%;
-  transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
+  @include transform(translateX(-50%));
   text-align: center;
+  opacity: 0;
 }
 
-@-webkit-keyframes up-and-down { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
-@keyframes up-and-down         { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
-@-o-keyframes up-and-down      { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
-@-moz-keyframes up-and-down    { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
-@-ms-keyframes up-and-down     { 0% { margin-top: 0px; } 100% { margin-top: 3px; } }
-
 .vertical-animate {
-  -webkit-animation: up-and-down 0.3s ease-in-out 2s infinite alternate;
-  -moz-animation:    up-and-down 0.3s ease-in-out 2s infinite alternate;
-  -ms-animation:     up-and-down 0.3s ease-in-out 2s infinite alternate;
-  -o-animation:      up-and-down 0.3s ease-in-out 2s infinite alternate;
-  animation:         up-and-down 0.3s ease-in-out 2s infinite alternate;
+  @include animation(up-and-down 0.3s ease-in-out 2s infinite alternate);
 }
 
 .arrow-down {

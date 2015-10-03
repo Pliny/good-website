@@ -1,10 +1,9 @@
 include ./includes/mixins.jade
 extends ./includes/template.jade
 block content
-  .email.color2
+  a(href="mailto:support@goodforca.com?Subject=Hi!" target="_blank")
+    .email.color2
   .page.set-height.background-color2.color2#page0
-    .header
-      .clearfix
     #problem1.problems.text1.in-front="XX gal. water consumption per person."
     #problem2.problems.text1.in-front="Some other fun fact about water."
     #water-animation-element.background-color1.color2.hidden
@@ -15,7 +14,7 @@ block content
         .text1.text-center="We support Californians reach their goal."
     .arrow-down.vertical-animate.water-animation-final.hidden
   .page.background-color1.color2#page1
-    +header("Save Water")(class="color2")
+    +header("Save Water")(color="color2" background_color="background-color1")
       .company-logo-small-color2
     h2.
       Good is a new shower device that can save up to 50% of your water usage, while maintaining an enjoyable shower experience.
@@ -23,14 +22,14 @@ block content
     h2.
       Good is a self-powered device with relevant real-time feedback to spur behavioral change.
   .page.background-color1.color2#page2
-    +header("Impact")(class="color2")
+    +header("Impact")(color="color2" background_color="background-color1")
       .company-logo-small-color2
     .row
       +icon-and-text("Save Water", "With Good, people can see their water usage in real time, getting immediate feedback showing how a change in habit can save water.")(class="savings-icon1")
       +icon-and-text("Save Money", "For the next 5 years, SF water is planning to increase the cost of water by 12% every year. Water will quickly become one of a household's costliest utility bills.")(class="savings-icon2")
       +icon-and-text("Save Energy", "2000 kWh/year. Water heating has the 2nd highest energy requirements after space heating. Saving hot water is key to achieving energy savings targets.")(class="savings-icon3")
   .page.background-color2.color3#page3
-    +header("About Us")(class="color1")
+    +header("About Us")(color="color1" background_color="background-color2")
       .company-logo-small-color1
     h2.
       We are a small team based in San Francisco dedicated to save water using IoT technology.
@@ -38,7 +37,7 @@ block content
     h2.
       We believe wat saving technology needs to have a better relationship with people.
   .page.background-color2.color3#page4
-    +header("Here To Help")(class="color1")
+    +header("Here To Help")(color="color1" background_color="background-color2")
       .company-logo-small-color1
     h2.color3.
       Design & User experience focus

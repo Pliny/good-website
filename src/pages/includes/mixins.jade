@@ -1,10 +1,13 @@
-mixin header(title, color)
-  .header.in-front.hidden
-    .pull-left
-      if block
-        block
-    h1.pull-left(class!=attributes.class).fade-in #{title}
-    .clearfix
+mixin header(title)
+  - var fadeClass = (attributes.background_color === "background-color1") ? "blurry-color1" : "blurry-color2";
+  .header-container.in-front.hidden
+    .header(class!=attributes.background_color)
+      .pull-left
+        if block
+          block
+      h1.pull-left(class!=attributes.color).fade-in #{title}
+      .clearfix
+    .blurry-bottom(class!=fadeClass)
 
 mixin icon-and-text(title, contents)
   .col-md-4.spacing1

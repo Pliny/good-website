@@ -53,12 +53,12 @@ manageInitialAnimation = () ->
   fadeAnimDur = 0.23*initAnimDur
 
   setTimeout(() ->
-    $('#problem1').addClass('fade-in-and-out').css('top', height*0.55)
+    $('#problem1').addClass('fade-in-and-out').css('top', height*0.50)
     $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
   ,(initAnimDur*0.39)-(fadeAnimDur/1.5))
 
   setTimeout(() ->
-    $('#problem2').addClass('fade-in-and-out').css('top', height*0.70)
+    $('#problem2').addClass('fade-in-and-out').css('top', height*0.60)
     $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
   ,(initAnimDur*0.69)-(fadeAnimDur/1.5))
 
@@ -78,6 +78,5 @@ $(document).on('ready', () ->
   $(document).on('click', '.arrow-down', () ->
     scroll.animateScrollFor(1000)
   )
-
 )
 

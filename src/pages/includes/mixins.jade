@@ -1,6 +1,8 @@
-mixin header(title)
+
+mixin header(pageNum, title)
+  include ./helpers.jade
   - var fadeClass = (attributes.background_color === "background-color1") ? "blurry-color1" : "blurry-color2";
-  .header-container.in-front.hidden
+  li.header-container.in-front.hidden(id=headerId(pageNum))
     .header(class!=attributes.background_color)
       .pull-left
         if block

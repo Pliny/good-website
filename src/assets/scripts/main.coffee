@@ -7,10 +7,10 @@ scroll
 height = 768
 
 PageCopy = {
-  '#page1 > .header > h1' : { 'smallScreen' : "Save Water",   'largeScreen' : "Internet of Water Things" },
-  '#page2 > .header > h1' : { 'smallScreen' : "Impact",       'largeScreen' : "Meaningful Impact"        },
-  '#page3 > .header > h1' : { 'smallScreen' : "About Us",     'largeScreen' : "About Us"                 },
-  '#page4 > .header > h1' : { 'smallScreen' : "Here To Help", 'largeScreen' : "We Want To Help"          },
+  '#header1 > .header > h1' : { 'smallScreen' : "Save Water",   'largeScreen' : "Internet of Water Things" },
+  '#header2 > .header > h1' : { 'smallScreen' : "Impact",       'largeScreen' : "Meaningful Impact"        },
+  '#header3 > .header > h1' : { 'smallScreen' : "About Us",     'largeScreen' : "About Us"                 },
+  '#header4 > .header > h1' : { 'smallScreen' : "Here To Help", 'largeScreen' : "We Want To Help"          },
   'footer > span'         : { 'smallScreen' : "(C) 2015 good Inc.", 'largeScreen' : "Copyright 2015 good Inc. All rights reserved with love. " }
 }
 
@@ -21,17 +21,14 @@ setTextFor = (screenSize) ->
 setView = () ->
   height = $(document).height()
 
-  setHeightEle = '.set-height'
-
   if $(document).width() < SCREENSMMIN
     setTextFor('smallScreen')
   else
-    setHeightEle += ', .page'
     setTextFor('largeScreen')
 
   $('.arrow-down').css('top', height-(height*0.075))
 
-  $(setHeightEle).css('height', height)
+  $('.set-height').css('height', height)
   $('#water-animation-element').addClass('initial-anim')
   $('footer, #container, #water-animation-element').removeClass('hidden')
 
@@ -70,13 +67,33 @@ manageInitialAnimation = () ->
 
 $(document).on('ready', () ->
   setView()
-  scroll = new Scroll($('#page1'))
   scrollSpy = new MyScrollSpy($('.page'))
 
   manageInitialAnimation()
 
-  $(document).on('click', '.arrow-down', () ->
-    scroll.animateScrollFor(1000)
-  )
+
+  if navigator.userAgent.match(/iPhone|iPad|iPod/i)
+    myScroll = new IScroll('#wrapper', { tap: true, probeType: 3, mouseWheel: true })
+    myScroll.on('scroll', () ->
+      scrollSpy.updateHeaderMaybe(-1*this.y)
+    )
+
+    $(document).on('touchmove', (e) ->
+      e.preventDefault()
+    )
+    $(document).on('tap', '.arrow-down', () ->
+      myScroll.scrollToElement('#page1', 1000, null, null, IScroll.utils.ease.quadratic)
+    )
+  else
+    $('#wrapper').removeClass('hide-overflow')
+    $(document).on('scroll', (e) ->
+      scrollOffset = window.document.documentElement.scrollTop or window.document.body.scrollTop
+      scrollSpy.updateHeaderMaybe(scrollOffset)
+    )
+
+    scroll = new Scroll($('#page1'))
+    $(document).on('click touchend', '.arrow-down', () ->
+      scroll.animateScrollFor(1000)
+    )
 )
 

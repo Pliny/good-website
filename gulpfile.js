@@ -49,6 +49,12 @@ gulp.task('copy-fonts', function() {
     .pipe(gulp.dest('./public'));
 });
 
+gulp.task('copy-3rdparty', function() {
+  gulp.src('third-party/**/*')
+    .pipe(gulp.dest('./public'))
+    .pipe(livereload());
+});
+
 gulp.task('express', function() {
   app.use(express.static(path.resolve('./public')));
   app.listen(1337);
@@ -64,7 +70,7 @@ gulp.task('watch', function () {
 });
 
 
-gulp.task('default', [ 'express', 'watch', 'templates', 'coffee', 'styles', 'copy-images', 'copy-fonts' ]);
+gulp.task('default', [ 'express', 'watch', 'templates', 'coffee', 'styles', 'copy-images', 'copy-fonts', 'copy-3rdparty' ]);
 
 // TODO
 //  - Development push (using good.davesdesrochers.com)

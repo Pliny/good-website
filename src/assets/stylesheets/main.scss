@@ -46,17 +46,17 @@ $arrow-down-height: 30px;
 }
 
 .blurry-color1 {
-  background: -webkit-linear-gradient(top, $blue 0%, transparent 100%) no-repeat center center;
-  background:         linear-gradient(top, $blue 0%, transparent 100%) no-repeat center center;
-  background:      -o-linear-gradient(top, $blue 0%, transparent 100%) no-repeat center center;
-  background:    -moz-linear-gradient(top, $blue 0%, transparent 100%) no-repeat center center;
+  background: -webkit-linear-gradient(top, $blue 0%, rgba($blue, 0) 100%) no-repeat center center;
+  background:         linear-gradient(top, $blue 0%, rgba($blue, 0) 100%) no-repeat center center;
+  background:      -o-linear-gradient(top, $blue 0%, rgba($blue, 0) 100%) no-repeat center center;
+  background:    -moz-linear-gradient(top, $blue 0%, rgba($blue, 0) 100%) no-repeat center center;
 }
 
 .blurry-color2 {
-  background: -webkit-linear-gradient(top, $white, transparent) no-repeat center center;
-  background:         linear-gradient(top, $white, transparent) no-repeat center center;
-  background:      -o-linear-gradient(top, $white, transparent) no-repeat center center;
-  background:    -moz-linear-gradient(top, $white, transparent) no-repeat center center;
+  background: -webkit-linear-gradient(top, $white, rgba($white, 0)) no-repeat center center;
+  background:         linear-gradient(top, $white, rgba($white, 0)) no-repeat center center;
+  background:      -o-linear-gradient(top, $white, rgba($white, 0)) no-repeat center center;
+  background:    -moz-linear-gradient(top, $white, rgba($white, 0)) no-repeat center center;
 }
 
 .blurry-bottom {

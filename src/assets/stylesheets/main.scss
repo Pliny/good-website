@@ -174,10 +174,6 @@ li {
   @include animation(up-and-down 0.3s ease-in-out 2s infinite alternate);
 }
 
-#large-logo-container {
-  margin-bottom: 3%;
-}
-
 #title-container {
   margin: auto auto;
   width: 70vw;
@@ -192,10 +188,10 @@ li {
   background:  url("./good-logo-white.svg") no-repeat center center;
   background-size: 100%;
   width: 50vw;
-  height: 28vw;
+  height: #{50*0.87}vw;
   @media (min-width: $screen-xs-min) and (min-height: $screen-sm-vmin) {
     width: 293px;
-    height: 163px;
+    height: #{293*0.87}px;
   }
 }
 
@@ -209,13 +205,13 @@ li {
 
 .company-logo-small-color2, .company-logo-small-color1 {
   background-size: 100%;
-  width: 68px;
-  height: 38px;
-  margin: 7px 8px auto 16px;
+  width: 58px;
+  height: #{64*0.87}px;
+  margin: -2px 8px 0 16px;
   @media (min-width: $screen-sm-min) {
-    width: 100px;
-    height: 56px;
-    margin: 14px 23px auto 24px;
+    width: 90px;
+    height: #{90*0.87}px;
+    margin: 3px 33px 0 24px;
   }
 }
 

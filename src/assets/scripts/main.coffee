@@ -26,7 +26,7 @@ setView = () ->
   else
     setTextFor('largeScreen')
 
-  $('.arrow-down').css('top', height-(height*0.075))
+  $('.arrow-down').css('top', height-(Math.round(height*0.075)))
 
   $('.set-height').css('height', height)
   $('#water-animation-element').addClass('initial-anim')
@@ -47,15 +47,17 @@ getAnimMs = ($animatedEle) ->
 
 manageInitialAnimation = () ->
   initAnimDur = getAnimMs($('#water-animation-element'))
-  fadeAnimDur = 0.23*initAnimDur
+  fadeAnimDur = Math.round(0.23*initAnimDur)
+
+  # $('#debug').text(height+" 1: "+Math.round(height*0.50)+" 2: "+Math.round(height*0.60))
 
   setTimeout(() ->
-    $('#problem1').addClass('fade-in-and-out').css('top', height*0.50)
+    $('#problem1').addClass('fade-in-and-out').css('top', Math.round(height*0.55))
     $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
   ,(initAnimDur*0.39)-(fadeAnimDur/1.5))
 
   setTimeout(() ->
-    $('#problem2').addClass('fade-in-and-out').css('top', height*0.60)
+    $('#problem2').addClass('fade-in-and-out').css('top', Math.round(height*0.75))
     $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
   ,(initAnimDur*0.69)-(fadeAnimDur/1.5))
 

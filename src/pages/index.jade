@@ -15,34 +15,36 @@ block nav
         .company-logo-small-color1
 block content
   include ./includes/helpers.jade
-  .page.set-height.background-color2.color2
-    #problem1.problems.text1.in-front="XX gal. water consumption per person."
-    #problem2.problems.text1.in-front="Some other fun fact about water."
+  .page.set-height.background-color2.color2#page0
+    #problem2.problems.text1.in-front="The average US citizen uses 105 gal. per day."
+    #problem1.problems.text1.in-front="400 billion gal. of water are used in the US every day."
     #water-animation-element.background-color1.color2.hidden
     .water-animation-final.vertical-align.hidden.slow-fade-in
       #large-logo-container
         .company-logo-large-color2
       #title-container
-        .text1.text-center="We support Californians reach their goal."
+        .text1.text-center="Save Water."
     .arrow-down.vertical-animate.water-animation-final.hidden
   .page#page1.background-color1.color2(use-header=headerId(1))
+    h2.
+      Good is a new company commited to helping you save water.
     .spacing1
     h2.
-      Good is a new shower device that can save up to 50% of your water usage, while maintaining an enjoyable shower experience.
+      Our first product is a shower device that can save up to 50% of your water usage, while keeping the great shower experience we all love.
     .spacing1
     h2.
-      Good is a self-powered device with relevant real-time feedback to spur behavioral change.
+      It's a self powered connected device with relevant real-time feedback to help show your water usage.
   .page.background-color1.color2(use-header=headerId(2))
     .row
-      +icon-and-text("Save Water", "With Good, people can see their water usage in real time, getting immediate feedback showing how a change in habit can save water.")(class="savings-icon1")
-      +icon-and-text("Save Money", "For the next 5 years, SF water is planning to increase the cost of water by 12% every year. Water will quickly become one of a household's costliest utility bills.")(class="savings-icon2")
-      +icon-and-text("Save Energy", "2000 kWh/year. Water heating has the 2nd highest energy requirements after space heating. Saving hot water is key to achieving energy savings targets.")(class="savings-icon3")
+      +icon-and-text("Save Water", "You can see your water usage trends over time, and if you want, adjust the flow rate.")(class="savings-icon1")
+      +icon-and-text("Save Money", "For the next 5 years, SF water is planning to increase the cost of water by 12% every year.")(class="savings-icon2")
+      +icon-and-text("Save Energy", "At 2000 kWh/year, water heating has the 2nd highest energy requirements after space heating.")(class="savings-icon3")
   .page.background-color2.color3(use-header=headerId(3))
     h2.
       We are a small team based in San Francisco dedicated to save water using IoT technology.
     .spacing1
     h2.
-      We believe wat saving technology needs to have a better relationship with people.
+      Our goal is for you to have a better relationship with water saving technology.
   .page.background-color2.color3(use-header=headerId(4))
     h2.color3.
       Design & User experience focus
@@ -56,6 +58,9 @@ block content
     .spacing1
     h2.color1.
       Good is committed to support Californians to reach their goal.
+    .spacing1
+    .text1.color3.
+      Check back soon to see our first product.
   footer.color1.hidden
     span="Copyright 2015 good Inc. All rights reserved with love. "
     a.color1(href="http://www.dsg.do", target="_blank")="#dsg"

@@ -63,7 +63,7 @@ $arrow-down-height: 30px;
   @media (min-width: $screen-sm-min) {
     height: #{57/$font-unit}em;
   }
-  height: 2.5em;
+  height: 2em;
   pointer-events: none;
 }
 
@@ -74,14 +74,17 @@ $arrow-down-height: 30px;
   margin: auto 4%;
 }
 
+#page0 {
+  padding: 10%;
+}
+
 .page {
   @media (min-width: $screen-sm-min) {
-    padding-left: 165px;
-    padding-top: 5%;
+    padding-left: 162px;
+    padding-top: 105px;
   }
-  padding: 10%;
+  padding: 55px 10% 10% 10%;
   position: relative;
-  // max-width: 615px;
 }
 
 #container {
@@ -178,18 +181,19 @@ li {
 #title-container {
   margin: auto auto;
   width: 70vw;
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: $screen-xs-min) and (min-height: $screen-sm-vmin) {
     width: 450px;
   }
 }
 
 .company-logo-large-color2 {
   margin: 0 auto;
+  // @include inline-svg("./good-logo-white.svg");
   background:  url("./good-logo-white.svg") no-repeat center center;
   background-size: 100%;
   width: 50vw;
   height: 28vw;
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: $screen-xs-min) and (min-height: $screen-sm-vmin) {
     width: 293px;
     height: 163px;
   }

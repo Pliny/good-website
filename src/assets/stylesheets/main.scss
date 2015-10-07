@@ -81,9 +81,9 @@ $arrow-down-height: 30px;
 .page {
   @media (min-width: $screen-sm-min) {
     padding-left: 162px;
-    padding-top: 105px;
+    padding-top: 92px;
   }
-  padding: 55px 10% 10% 10%;
+  padding: 48px 10% 10% 10%;
   position: relative;
 }
 
@@ -208,13 +208,14 @@ li {
 }
 
 .company-logo-small-color2, .company-logo-small-color1 {
-  // TODO: Resize statically
-  background-size: 68%;
-  width: 100px;
-  height: 50px;
+  background-size: 100%;
+  width: 68px;
+  height: 38px;
+  margin: 7px 8px auto 16px;
   @media (min-width: $screen-sm-min) {
-    width: 147px;
-    height: 82px;
+    width: 100px;
+    height: 56px;
+    margin: 14px 23px auto 24px;
   }
 }
 

@@ -47,7 +47,7 @@ getAnimMs = ($animatedEle) ->
 
 manageInitialAnimation = () ->
   initAnimDur = getAnimMs($('#water-animation-element'))
-  fadeAnimDur = Math.round(0.23*initAnimDur)
+  fadeAnimDur = Math.round(0.30*initAnimDur)
 
   # $('#debug').text(height+" 1: "+Math.round(height*0.50)+" 2: "+Math.round(height*0.60))
 

@@ -155,7 +155,7 @@ li {
 }
 
 .initial-anim {
-  @include animation(initial-anim 10s cubic-bezier(0.390, 0.060, 0.105, 0.980));
+  @include animation(initial-anim 13s cubic-bezier(0.390, 0.060, 0.105, 0.980));
 }
 
 .fade-in-and-out {
@@ -184,7 +184,6 @@ li {
 
 .company-logo-large-color2 {
   margin: 0 auto;
-  // @include inline-svg("./good-logo-white.svg");
   background:  url("./good-logo-white.svg") no-repeat center center;
   background-size: 100%;
   width: 50vw;

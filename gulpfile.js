@@ -10,7 +10,8 @@ var gulp       = require('gulp'),
 // Development Environment libraries
 var jade       = require('gulp-jade'),
     browserify = require('gulp-browserify'),
-    sass       = require('gulp-sass');
+    sass       = require('gulp-sass'),
+    inlineimage = require('gulp-inline-image');
 
 gulp.task('templates', function() {
   return gulp.src('src/pages/*.jade')
@@ -34,6 +35,7 @@ gulp.task('styles', function() {
   gulp.src('src/assets/stylesheets/main.scss')
     .pipe(sass({includePaths: ['src/assets/stylesheets']}))
     .on('error', sass.logError)
+    .pipe(inlineimage({baseDir: 'src/assets/images'}))
     .pipe(gulp.dest('./public'))
     .pipe(livereload());
 });

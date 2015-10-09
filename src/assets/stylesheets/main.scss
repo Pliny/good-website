@@ -5,10 +5,11 @@
 @import 'animations';
 
 $arrow-down-width: 38px;
-$arrow-down-height: 30px;
+$arrow-down-height: 19px;
 
 .arrow-down {
   background-image: inline-image("./arrow-down.svg");
+  background-repeat: no-repeat;
 
   width:  #{$arrow-down-width/2};
   height: #{$arrow-down-height/2};

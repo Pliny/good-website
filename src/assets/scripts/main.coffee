@@ -74,7 +74,6 @@ $(document).on('ready', () ->
 
   manageInitialAnimation()
 
-  scroll = new IScrollManager($('.page'))
   if navigator.userAgent.match(/iPhone|iPad|iPod/i)
     scroll = new IScrollManager($('.page'))
   else

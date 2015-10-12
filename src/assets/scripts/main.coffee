@@ -1,10 +1,10 @@
-Scroll = require('./scroll')
-MyScrollSpy = require('./scrollspy')
+IScrollManager       = require('./scrollManager').IScrollManager
+ClassicScrollManager = require('./scrollManager').ClassicScrollManager
 
 SCREENSMMIN = 768
 
-scroll
 height = 768
+scroll = null
 
 PageCopy = {
   '#header1 > .header > h1' : { 'smallScreen' : "Save Water",   'largeScreen' : "Internet of Water Things" },
@@ -49,8 +49,6 @@ manageInitialAnimation = () ->
   initAnimDur = getAnimMs($('#water-animation-element'))
   fadeAnimDur = Math.round(0.30*initAnimDur)
 
-  # $('#debug').text(height+" 1: "+Math.round(height*0.50)+" 2: "+Math.round(height*0.60))
-
   setTimeout(() ->
     $('#problem1').addClass('fade-in-and-out').css('top', Math.round(height*0.55))
     $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
@@ -64,38 +62,22 @@ manageInitialAnimation = () ->
   $(document).on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', '.initial-anim', () ->
     $('.problems').addClass('hidden')
     $('.water-animation-final').removeClass('hidden')
+
+    if scroll.y() < 8
+      timeInSec = Math.floor((new Date).getTime()/1000)
+      ga('send', 'event', 'frontPageAnimation', 'viewed', 'userWatchedAnimationFinish', timeInSec)
   )
 
 
 $(document).on('ready', () ->
   setView()
-  scrollSpy = new MyScrollSpy($('.page'))
 
   manageInitialAnimation()
 
-
+  scroll = new IScrollManager($('.page'))
   if navigator.userAgent.match(/iPhone|iPad|iPod/i)
-    myScroll = new IScroll('#wrapper', { tap: true, probeType: 3, mouseWheel: true })
-    myScroll.on('scroll', () ->
-      scrollSpy.updateHeaderMaybe(-1*this.y)
-    )
-
-    $(document).on('touchmove', (e) ->
-      e.preventDefault()
-    )
-    $(document).on('tap', '.arrow-down', () ->
-      myScroll.scrollToElement('#page1', 1000, null, null, IScroll.utils.ease.quadratic)
-    )
+    scroll = new IScrollManager($('.page'))
   else
-    $('#wrapper').removeClass('hide-overflow')
-    $(document).on('scroll', (e) ->
-      scrollOffset = window.document.documentElement.scrollTop or window.document.body.scrollTop
-      scrollSpy.updateHeaderMaybe(scrollOffset)
-    )
-
-    scroll = new Scroll($('#page1'))
-    $(document).on('click touchend', '.arrow-down', () ->
-      scroll.animateScrollFor(1000)
-    )
+    scroll = new ClassicScrollManager($('.page'))
 )
 

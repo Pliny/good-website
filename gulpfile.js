@@ -38,8 +38,8 @@ replaceAssetUrl = function() {
   })();
 }
 
-gulp.task('asset-pipeline', function() {
-  return runSequence([ 'coffee', 'styles' ], 'templates');
+gulp.task('asset-pipeline', function(callback) {
+  runSequence([ 'coffee', 'styles' ], 'templates', callback);
 });
 
 gulp.task('templates', function() {
@@ -119,8 +119,9 @@ gulp.task('watch', function () {
   gulp.watch([ 'src/assets/stylesheets/**/*.scss', 'src/assets/images/*.svg' ],['styles']);
 });
 
-gulp.task('clean-public', function() {
-  del.sync([ './public/**', '!./public' ] );
+gulp.task('clean-public', function(callback) {
+  del.sync([ './public/**', '!./public' ])
+  return callback();
 });
 
 gulp.task('s3-push', function() {
@@ -128,17 +129,17 @@ gulp.task('s3-push', function() {
   aws['key']    = eval(aws['key']);
   aws['secret'] = eval(aws['secret']);
 
-  options = { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public', 'Vary' : 'Accept-Encoding' } };
+  options = { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public' } };
   return gulp.src('./public/**')
     .pipe(s3(aws, options));
 });
 
-gulp.task('production', function() {
+gulp.task('production', function(callback) {
   process.env.GULP_ENV = 'production';
-  runSequence('clean-public', 'create-public', 's3-push', function() { process.env.GULP_ENV = 'development'; } );
+  runSequence('clean-public', 'create-public', 's3-push', callback );
 });
 
-gulp.task('create-public', [ 'asset-pipeline', 'copy-fonts', 'copy-robots', 'copy-favicon' ]);
+gulp.task('create-public', [ 'asset-pipeline', 'copy-robots', 'copy-favicon' ]);
 gulp.task('default', [ 'express', 'watch', 'create-public' ]);
 
 // TODO

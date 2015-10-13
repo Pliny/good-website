@@ -5,7 +5,8 @@ var gulp       = require('gulp'),
     path       = require('path'),
     express    = require('express'),
     app        = express(),
-    rename     = require('gulp-rename');
+    rename     = require('gulp-rename'),
+    del        = require('del');
 
 // Development Environment libraries
 var jade       = require('gulp-jade'),
@@ -16,7 +17,8 @@ var jade       = require('gulp-jade'),
 // Production push
 var s3  = require("gulp-s3"),
     rev = require('gulp-rev'),
-    revReplace = require('gulp-rev-replace');
+    revReplace = require('gulp-rev-replace'),
+    runSequence = require('run-sequence');
 
 gulp.task('asset-pipeline', [ 'coffee', 'styles' ], function() {
 
@@ -86,10 +88,10 @@ gulp.task('watch', function () {
 });
 
 gulp.task('clean-public', function() {
-  require('del').sync([ './public/**', '!./public' ] );
+  del.sync([ './public/**', '!./public' ] );
 });
 
-gulp.task('production', [ 'create-public-devel' ], function() {
+gulp.task('s3-push', function() {
   aws = JSON.parse(require('fs').readFileSync('./config/aws.json'));
   aws['key']    = eval(aws['key']);
   aws['secret'] = eval(aws['secret']);
@@ -97,6 +99,10 @@ gulp.task('production', [ 'create-public-devel' ], function() {
   options = { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public' } };
   gulp.src('./public/**')
     .pipe(s3(aws, options));
+});
+
+gulp.task('production', function() {
+  runSequence('clean-public', 'create-public-devel', 's3-push' );
 });
 
 gulp.task('create-public-devel', [ 'asset-pipeline', 'copy-fonts', 'copy-robots' ]);

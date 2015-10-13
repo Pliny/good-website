@@ -14,11 +14,17 @@ var jade       = require('gulp-jade'),
     inlineimage = require('gulp-inline-image');
 
 // Production push
-var s3 = require("gulp-s3");
+var s3  = require("gulp-s3"),
+    rev = require('gulp-rev'),
+    revReplace = require('gulp-rev-replace');
 
-gulp.task('templates', function() {
+gulp.task('asset-pipeline', [ 'coffee', 'styles' ], function() {
+
+  var manifest = gulp.src("./tmp/rev-manifest.json");
+
   return gulp.src('src/pages/*.jade')
-    .pipe(jade({ pretty: true }))
+    .pipe(jade())
+    .pipe(revReplace({manifest: manifest}))
     .pipe(gulp.dest('./public'))
     .pipe(livereload());
 });
@@ -30,16 +36,22 @@ gulp.task('coffee', function() {
       extensions: ['.coffee'],
     }).on('error', gutil.log))
     .pipe(rename('main.js'))
+    .pipe(rev())
     .pipe(gulp.dest('./public'))
+    .pipe(rev.manifest("./tmp/rev-manifest.json", {'base': '.', 'merge': true}))
+    .pipe(gulp.dest('.'))
     .pipe(livereload());
 });
 
 gulp.task('styles', function() {
-  gulp.src('src/assets/stylesheets/main.scss')
+  gulp.src([ 'src/assets/stylesheets/main.scss', 'third-party/stylesheets/*' ])
     .pipe(sass({includePaths: ['src/assets/stylesheets']}))
     .on('error', sass.logError)
     .pipe(inlineimage({baseDir: 'src/assets/images'}))
+    .pipe(rev())
     .pipe(gulp.dest('./public'))
+    .pipe(rev.manifest("./tmp/rev-manifest.json", {'base': '.', 'merge': true}))
+    .pipe(gulp.dest('.'))
     .pipe(livereload());
 });
 
@@ -52,12 +64,6 @@ gulp.task('copy-images', function() {
 gulp.task('copy-fonts', function() {
   gulp.src('src/assets/fonts/*')
     .pipe(gulp.dest('./public'));
-});
-
-gulp.task('copy-3rdparty', function() {
-  gulp.src('third-party/**/*')
-    .pipe(gulp.dest('./public'))
-    .pipe(livereload());
 });
 
 gulp.task('copy-robots', function() {
@@ -79,7 +85,11 @@ gulp.task('watch', function () {
   gulp.watch([ 'src/assets/stylesheets/**/*.scss', 'src/assets/images/*.svg' ],['styles']);
 });
 
-gulp.task('production', function() {
+gulp.task('clean-public', function() {
+  require('del').sync([ './public/**', '!./public' ] );
+});
+
+gulp.task('production', [ 'create-public-devel' ], function() {
   aws = JSON.parse(require('fs').readFileSync('./config/aws.json'));
   aws['key']    = eval(aws['key']);
   aws['secret'] = eval(aws['secret']);
@@ -89,8 +99,8 @@ gulp.task('production', function() {
     .pipe(s3(aws, options));
 });
 
-
-gulp.task('default', [ 'express', 'watch', 'templates', 'coffee', 'styles', 'copy-fonts', 'copy-3rdparty', 'copy-robots' ]);
+gulp.task('create-public-devel', [ 'asset-pipeline', 'copy-fonts', 'copy-robots' ]);
+gulp.task('default', [ 'express', 'watch', 'create-public-devel' ]);
 
 // TODO
 //  - Development push (using good.davesdesrochers.com)

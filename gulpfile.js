@@ -109,7 +109,7 @@ gulp.task('s3-push', function() {
   aws['key']    = eval(aws['key']);
   aws['secret'] = eval(aws['secret']);
 
-  options = { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public' } };
+  options = { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public', 'Vary' : 'Accept-Encoding' } };
   gulp.src('./public/**')
     .pipe(s3(aws, options));
 });

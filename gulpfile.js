@@ -13,6 +13,9 @@ var jade       = require('gulp-jade'),
     sass       = require('gulp-sass'),
     inlineimage = require('gulp-inline-image');
 
+// Production push
+var s3 = require("gulp-s3");
+
 gulp.task('templates', function() {
   return gulp.src('src/pages/*.jade')
     .pipe(jade({ pretty: true }))
@@ -73,12 +76,21 @@ gulp.task('watch', function () {
   livereload.listen();
   gulp.watch('src/pages/**/*.jade',['templates']);
   gulp.watch('src/assets/scripts/*.coffee',['coffee']);
-  gulp.watch('src/assets/stylesheets/**/*.scss',['styles']);
-  gulp.watch('src/assets/images/*.svg', ['copy-images']);
+  gulp.watch([ 'src/assets/stylesheets/**/*.scss', 'src/assets/images/*.svg' ],['styles']);
+});
+
+gulp.task('production', function() {
+  aws = JSON.parse(require('fs').readFileSync('./config/aws.json'));
+  aws['key']    = eval(aws['key']);
+  aws['secret'] = eval(aws['secret']);
+
+  options = { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public' } };
+  gulp.src('./public/**')
+    .pipe(s3(aws, options));
 });
 
 
-gulp.task('default', [ 'express', 'watch', 'templates', 'coffee', 'styles', 'copy-images', 'copy-fonts', 'copy-3rdparty', 'copy-robots' ]);
+gulp.task('default', [ 'express', 'watch', 'templates', 'coffee', 'styles', 'copy-fonts', 'copy-3rdparty', 'copy-robots' ]);
 
 // TODO
 //  - Development push (using good.davesdesrochers.com)

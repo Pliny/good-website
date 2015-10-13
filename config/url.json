@@ -1,4 +1,4 @@
 {
   "development" : ".",
-  "production"  : "//www.goodforca.com.s3-website-us-west-1.amazonaws.com"
+  "production"  : "//dor87dei28v9f.cloudfront.net"
 }

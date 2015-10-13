@@ -14,7 +14,8 @@ var gulp       = require('gulp'),
 var jade       = require('gulp-jade'),
     browserify = require('gulp-browserify'),
     sass       = require('gulp-sass'),
-    inlineimage = require('gulp-inline-image');
+    inlineimage = require('gulp-inline-image'),
+    lazypipe   = require('lazypipe');
 
 // Dev/Prod
 var s3          = require("gulp-s3"),
@@ -24,11 +25,11 @@ var s3          = require("gulp-s3"),
     uglify      = require('gulp-uglify'),
     ifElse      = require('gulp-if');
 
-isProd = function() {
+var isProd = function() {
   return process.env.GULP_ENV === 'production';
 }
 
-replaceAssetUrl = function() {
+var replaceAssetUrl = function() {
   assetUrls = JSON.parse(fs.readFileSync('./config/url.json'));
   urlRoot = isProd() ? 'production' : 'development';
   url = assetUrls[urlRoot];
@@ -37,6 +38,10 @@ replaceAssetUrl = function() {
     return replace(/@{ASSET_URL}/g, url)
   })();
 }
+
+var cacheBustManifest = lazypipe()
+  .pipe(rev.manifest, "./tmp/rev-manifest.json", {'base': '.', 'merge': true})
+  .pipe(gulp.dest, '.');
 
 gulp.task('asset-pipeline', function(callback) {
   runSequence([ 'coffee', 'styles' ], 'templates', callback);
@@ -65,9 +70,7 @@ gulp.task('coffee', function() {
     .pipe(ifElse(isProd, rev()))
     .pipe(replaceAssetUrl())
     .pipe(gulp.dest('./public'))
-    .pipe(rev.manifest("./tmp/rev-manifest.json", {'base': '.', 'merge': true}))
-    .pipe(gulp.dest('.'))
-    .pipe(livereload());
+    .pipe(ifElse(isProd, cacheBustManifest(), livereload()));
 });
 
 gulp.task('styles', function() {
@@ -84,9 +87,7 @@ gulp.task('styles', function() {
     .pipe(ifElse(isProd, rev()))
     .pipe(replaceAssetUrl())
     .pipe(gulp.dest('./public'))
-    .pipe(rev.manifest("./tmp/rev-manifest.json", {'base': '.', 'merge': true}))
-    .pipe(gulp.dest('.'))
-    .pipe(livereload());
+    .pipe(ifElse(isProd, cacheBustManifest(), livereload()));
 });
 
 gulp.task('copy-favicon', function() {

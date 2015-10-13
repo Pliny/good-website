@@ -2,30 +2,26 @@
 $font-unit: 16;
 
 @font-face {
-  font-family: "Dosis Medium";
-  src: url('@{ASSET_URL}/Dosis-Medium.otf') format('opentype');
+  font-family: "Dosis";
   font-style: normal;
-  font-weight: 400;
   font-stretch: normal;
 }
 
 @font-face {
-  font-family: "Roboto Thin";
-  src: url('@{ASSET_URL}/Roboto-Thin.ttf') format('truetype');
+  font-family: "Roboto";
   font-style: normal;
-  font-weight: 400;
   font-stretch: normal;
 }
 
 html, body {
-  font-family: "Roboto Thin", script;
+  font-family: "Roboto", script;
   text-rendering: optimizeLegibility;
   font-weight: normal;
   font-size: 100%;
 }
 
 .header, footer, .email {
-  font-family: "Dosis Medium", script;
+  font-family: "Dosis", script;
   text-rendering: optimizeLegibility;
   font-size: 100%;
 }

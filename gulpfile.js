@@ -38,7 +38,11 @@ replaceAssetUrl = function() {
   })();
 }
 
-gulp.task('asset-pipeline', [ 'coffee', 'styles' ], function() {
+gulp.task('asset-pipeline', function() {
+  runSequence([ 'coffee', 'styles' ], 'templates');
+});
+
+gulp.task('templates', function() {
 
   var manifest = gulp.src("./tmp/rev-manifest.json");
 

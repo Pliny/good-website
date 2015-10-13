@@ -3,7 +3,7 @@ $font-unit: 16;
 
 @font-face {
   font-family: "Dosis Medium";
-  src: url('Dosis-Medium.otf') format('opentype');
+  src: url('@{ASSET_URL}/Dosis-Medium.otf') format('opentype');
   font-style: normal;
   font-weight: 400;
   font-stretch: normal;
@@ -11,7 +11,7 @@ $font-unit: 16;
 
 @font-face {
   font-family: "Roboto Thin";
-  src: url('Roboto-Thin.ttf') format('truetype');
+  src: url('@{ASSET_URL}/Roboto-Thin.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
   font-stretch: normal;

@@ -1,0 +1,4 @@
+{
+  "development" : ".",
+  "production"  : "http://www.goodforca.com.s3-website-us-west-1.amazonaws.com"
+}

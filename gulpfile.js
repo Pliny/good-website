@@ -6,7 +6,9 @@ var gulp       = require('gulp'),
     express    = require('express'),
     app        = express(),
     rename     = require('gulp-rename'),
-    del        = require('del');
+    del        = require('del'),
+    fs         = require('fs'),
+    replace    = require('gulp-replace');
 
 // Development Environment libraries
 var jade       = require('gulp-jade'),
@@ -14,16 +16,26 @@ var jade       = require('gulp-jade'),
     sass       = require('gulp-sass'),
     inlineimage = require('gulp-inline-image');
 
-// Production push
+// Dev/Prod
 var s3          = require("gulp-s3"),
     rev         = require('gulp-rev'),
     revReplace  = require('gulp-rev-replace'),
     runSequence = require('run-sequence'),
-    uglify      = require('gulp-uglify');
+    uglify      = require('gulp-uglify'),
     ifElse      = require('gulp-if');
 
 isProd = function() {
   return process.env.GULP_ENV === 'production';
+}
+
+replaceAssetUrl = function() {
+  assetUrls = JSON.parse(fs.readFileSync('./config/url.json'));
+  urlRoot = isProd() ? 'production' : 'development';
+  url = assetUrls[urlRoot];
+
+  return (function() {
+    return replace(/@{ASSET_URL}/g, url)
+  })();
 }
 
 gulp.task('asset-pipeline', [ 'coffee', 'styles' ], function() {
@@ -33,6 +45,7 @@ gulp.task('asset-pipeline', [ 'coffee', 'styles' ], function() {
   return gulp.src('src/pages/*.jade')
     .pipe(jade())
     .pipe(ifElse(isProd, revReplace({manifest: manifest})))
+    .pipe(replaceAssetUrl())
     .pipe(gulp.dest('./public'))
     .pipe(livereload());
 });
@@ -46,6 +59,7 @@ gulp.task('coffee', function() {
     .pipe(rename('main.js'))
     .pipe(ifElse(isProd, uglify()))
     .pipe(ifElse(isProd, rev()))
+    .pipe(replaceAssetUrl())
     .pipe(gulp.dest('./public'))
     .pipe(rev.manifest("./tmp/rev-manifest.json", {'base': '.', 'merge': true}))
     .pipe(gulp.dest('.'))
@@ -64,6 +78,7 @@ gulp.task('styles', function() {
     .on('error', sass.logError)
     .pipe(inlineimage({baseDir: 'src/assets/images'}))
     .pipe(ifElse(isProd, rev()))
+    .pipe(replaceAssetUrl())
     .pipe(gulp.dest('./public'))
     .pipe(rev.manifest("./tmp/rev-manifest.json", {'base': '.', 'merge': true}))
     .pipe(gulp.dest('.'))
@@ -105,7 +120,7 @@ gulp.task('clean-public', function() {
 });
 
 gulp.task('s3-push', function() {
-  aws = JSON.parse(require('fs').readFileSync('./config/aws.json'));
+  aws = JSON.parse(fs.readFileSync('./config/aws.json'));
   aws['key']    = eval(aws['key']);
   aws['secret'] = eval(aws['secret']);
 

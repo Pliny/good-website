@@ -15,10 +15,16 @@ var jade       = require('gulp-jade'),
     inlineimage = require('gulp-inline-image');
 
 // Production push
-var s3  = require("gulp-s3"),
-    rev = require('gulp-rev'),
-    revReplace = require('gulp-rev-replace'),
-    runSequence = require('run-sequence');
+var s3          = require("gulp-s3"),
+    rev         = require('gulp-rev'),
+    revReplace  = require('gulp-rev-replace'),
+    runSequence = require('run-sequence'),
+    uglify      = require('gulp-uglify');
+    ifElse      = require('gulp-if');
+
+isProd = function() {
+  return process.env.GULP_ENV === 'production';
+}
 
 gulp.task('asset-pipeline', [ 'coffee', 'styles' ], function() {
 
@@ -26,7 +32,7 @@ gulp.task('asset-pipeline', [ 'coffee', 'styles' ], function() {
 
   return gulp.src('src/pages/*.jade')
     .pipe(jade())
-    .pipe(revReplace({manifest: manifest}))
+    .pipe(ifElse(isProd, revReplace({manifest: manifest})))
     .pipe(gulp.dest('./public'))
     .pipe(livereload());
 });
@@ -38,7 +44,8 @@ gulp.task('coffee', function() {
       extensions: ['.coffee'],
     }).on('error', gutil.log))
     .pipe(rename('main.js'))
-    .pipe(rev())
+    .pipe(ifElse(isProd, uglify()))
+    .pipe(ifElse(isProd, rev()))
     .pipe(gulp.dest('./public'))
     .pipe(rev.manifest("./tmp/rev-manifest.json", {'base': '.', 'merge': true}))
     .pipe(gulp.dest('.'))
@@ -46,11 +53,17 @@ gulp.task('coffee', function() {
 });
 
 gulp.task('styles', function() {
+
+  var sass_opts = {includePaths: ['src/assets/stylesheets'] };
+  if(isProd()) {
+    sass_opts['outputStyle'] = 'compressed';
+  }
+
   gulp.src([ 'src/assets/stylesheets/main.scss', 'third-party/stylesheets/*' ])
-    .pipe(sass({includePaths: ['src/assets/stylesheets']}))
+    .pipe(sass(sass_opts))
     .on('error', sass.logError)
     .pipe(inlineimage({baseDir: 'src/assets/images'}))
-    .pipe(rev())
+    .pipe(ifElse(isProd, rev()))
     .pipe(gulp.dest('./public'))
     .pipe(rev.manifest("./tmp/rev-manifest.json", {'base': '.', 'merge': true}))
     .pipe(gulp.dest('.'))
@@ -102,15 +115,13 @@ gulp.task('s3-push', function() {
 });
 
 gulp.task('production', function() {
-  runSequence('clean-public', 'create-public-devel', 's3-push' );
+  process.env.GULP_ENV = 'production';
+  runSequence('clean-public', 'create-public', 's3-push', function() { process.env.GULP_ENV = 'development'; } );
 });
 
-gulp.task('create-public-devel', [ 'asset-pipeline', 'copy-fonts', 'copy-robots', 'copy-favicon' ]);
-gulp.task('default', [ 'express', 'watch', 'create-public-devel' ]);
+gulp.task('create-public', [ 'asset-pipeline', 'copy-fonts', 'copy-robots', 'copy-favicon' ]);
+gulp.task('default', [ 'express', 'watch', 'create-public' ]);
 
 // TODO
 //  - Development push (using good.davesdesrochers.com)
-//  - Production packaging
-//  - Minify
 //  - Mocha (testing)
-//  - Image copies

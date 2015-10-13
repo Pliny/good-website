@@ -39,7 +39,7 @@ replaceAssetUrl = function() {
 }
 
 gulp.task('asset-pipeline', function() {
-  runSequence([ 'coffee', 'styles' ], 'templates');
+  return runSequence([ 'coffee', 'styles' ], 'templates');
 });
 
 gulp.task('templates', function() {
@@ -77,7 +77,7 @@ gulp.task('styles', function() {
     sass_opts['outputStyle'] = 'compressed';
   }
 
-  gulp.src([ 'src/assets/stylesheets/main.scss', 'third-party/stylesheets/*' ])
+  return gulp.src([ 'src/assets/stylesheets/main.scss', 'third-party/stylesheets/*' ])
     .pipe(sass(sass_opts))
     .on('error', sass.logError)
     .pipe(inlineimage({baseDir: 'src/assets/images'}))
@@ -90,18 +90,18 @@ gulp.task('styles', function() {
 });
 
 gulp.task('copy-favicon', function() {
-  gulp.src('src/assets/images/*.ico')
+  return gulp.src('src/assets/images/*.ico')
     .pipe(gulp.dest('./public'))
     .pipe(livereload());
 });
 
 gulp.task('copy-fonts', function() {
-  gulp.src('src/assets/fonts/*')
+  return gulp.src('src/assets/fonts/*')
     .pipe(gulp.dest('./public'));
 });
 
 gulp.task('copy-robots', function() {
-  gulp.src('robots/*')
+  return gulp.src('robots/*')
     .pipe(gulp.dest('./public'))
     .pipe(livereload());
 });
@@ -129,7 +129,7 @@ gulp.task('s3-push', function() {
   aws['secret'] = eval(aws['secret']);
 
   options = { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public', 'Vary' : 'Accept-Encoding' } };
-  gulp.src('./public/**')
+  return gulp.src('./public/**')
     .pipe(s3(aws, options));
 });
 

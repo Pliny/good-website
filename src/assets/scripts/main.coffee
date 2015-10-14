@@ -1,5 +1,6 @@
 IScrollManager       = require('./scrollManager').IScrollManager
 ClassicScrollManager = require('./scrollManager').ClassicScrollManager
+OneTimeAnim          = require('./infinite-loop')
 
 SCREENSMMIN = 768
 
@@ -49,19 +50,21 @@ manageInitialAnimation = () ->
   initAnimDur = getAnimMs($('#water-animation-element'))
   fadeAnimDur = Math.round(0.30*initAnimDur)
 
+  $('.problems').css('animation-duration', fadeAnimDur+"ms")
+
   setTimeout(() ->
     $('#problem1').addClass('fade-in-and-out').css('top', Math.round(height*0.55))
-    $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
   ,(initAnimDur*0.39)-(fadeAnimDur/1.5))
 
   setTimeout(() ->
     $('#problem2').addClass('fade-in-and-out').css('top', Math.round(height*0.75))
-    $('.fade-in-and-out').css('animation-duration', fadeAnimDur+"ms")
   ,(initAnimDur*0.69)-(fadeAnimDur/1.5))
 
   $(document).on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', '.initial-anim', () ->
     $('.problems').addClass('hidden')
     $('.water-animation-final').removeClass('hidden')
+    oneTimeAnim = new OneTimeAnim({'timeMs' : 1500, 'selector' : '#title-container > ul'})
+    oneTimeAnim.start()
 
     if scroll.y() < 8
       timeInSec = Math.floor((new Date).getTime()/1000)

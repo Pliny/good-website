@@ -156,11 +156,23 @@ li {
 }
 
 .initial-anim {
-  @include animation(initial-anim 13s cubic-bezier(0.390, 0.060, 0.105, 0.980));
+  @include animation(initial-anim 3s cubic-bezier(0.390, 0.060, 0.105, 0.980));
 }
 
 .fade-in-and-out {
   @include animation(fade-in-out 3s ease-in-out 0s 1 normal);
+}
+
+.fade-out {
+  @include animation(fade-out 3s ease-in-out 0s 1 normal);
+}
+
+.adv-in-anim {
+  @include animation(adv-in-anim 0.5s ease-in-out 0s 1 normal);
+}
+
+.adv-out-anim {
+  @include animation(adv-out-anim 0.5s ease-in-out 0s 1 normal);
 }
 
 .problems {
@@ -176,12 +188,40 @@ li {
 }
 
 #title-container {
-  margin: -24px auto auto auto;
+  margin: -130px auto auto auto;
   width: 70vw;
   @media (min-width: $screen-xs-min) and (min-height: $screen-sm-vmin) {
     width: 450px;
   }
+
+  ul {
+    display: inline-block;
+  }
 }
+
+.adv-anim {
+  @include transition(transform 500ms ease-in-out);
+}
+
+.adv-anim-ele {
+  @include transition(opacity 500ms ease-in-out);
+}
+
+.text-blur {
+  @include animation(text-blur-in-out 3s linear);
+}
+
+#save-thing1, #save-thing2, #save-thing3 {
+  min-width: 70px;
+  @media (min-width: $screen-sm-min) {
+    min-width: 124px;
+  }
+}
+
+.see-through {
+  opacity: 0;
+}
+
 
 .company-logo-color2 {
   background-image:  inline-image("./good-logo-white.svg");

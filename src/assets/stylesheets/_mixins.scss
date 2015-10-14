@@ -23,3 +23,11 @@
   @-ms-keyframes     #{$name} { @content; }
 }
 
+@mixin transition($params...) {
+  transition:         $params;
+  -webkit-transition: $params;
+  -o-transition:      $params;
+  -moz-transition:    $params;
+  -ms-transition:     $params;
+}
+

@@ -130,9 +130,11 @@ gulp.task('s3-push', function() {
   aws['key']    = eval(aws['key']);
   aws['secret'] = eval(aws['secret']);
 
-  options = { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public' } };
-  return gulp.src('./public/**')
-    .pipe(s3(aws, options));
+  gulp.src([ './public/**', '!./public/index.html' ])
+    .pipe(s3(aws, { headers: { 'Cache-Control' : 'max-age=31536000, no-transform, public' } }));
+
+  return  gulp.src('./public/index.html')
+    .pipe(s3(aws, { headers: { 'Content-Type' : "text/html;charset=utf-8"}}));
 });
 
 gulp.task('production', function(callback) {

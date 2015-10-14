@@ -1,6 +1,6 @@
 IScrollManager       = require('./scrollManager').IScrollManager
 ClassicScrollManager = require('./scrollManager').ClassicScrollManager
-OneTimeAnim          = require('./infinite-loop')
+OneTimeAnim          = require('./ring-animation')
 
 SCREENSMMIN = 768
 

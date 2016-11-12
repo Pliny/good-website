@@ -1,6 +1,6 @@
 {
   "key": "process.env['AWS_KEY']",
   "secret": "process.env['AWS_SECRET']",
-  "bucket": "www.goodforca.com",
+  "bucket": "www.iowt.io",
   "region": "us-west-1"
 }
